@@ -1,0 +1,45 @@
+{% extends "admin/layout.njk" %}
+{% block head %}
+<title>Foodfy Admin - Cadastro</title>
+{% endblock %}
+{% block content %}
+<div class="admin-create-container">
+    <form action="/admin" method="POST">
+        <div class="admin-create-head">
+            <h1>Criando receita </h1> 
+            <button type="submit">Salvar receita</button> 
+        </div>
+        <div class="form-item">
+            <div>Autor da Receita</div>
+            <input type="text" name="author">
+        </div>
+         <div class="form-item">
+            <div>Nome da Receita</div>
+            <input type="text" name="name">
+        </div>
+        <div class="form-item">
+            <div>Imagem da Receita</div>
+            <input type="url" name="image" placeholder="HTTP://">
+        </div>
+        <div class="form-item" id="ingredients">
+            <div>Ingredientes</div>
+            <div class="ingredient">
+                <input type="text" name="ingredients[]" value="">
+            </div>
+        </div>
+        <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+        <div class="form-item" id="prepares">
+            <div>Modo de Preparo</div>
+            <div class="prepare">
+                <input type="text" name="prepare[]" value="">
+            </div>
+        </div>
+        <button type="button" class="add-prepare">Adicionar novo passo</button>
+        <div class="form-item">
+            <div>Informações Adicionais</div>
+            <textarea name="info" id="" cols="60" rows="20">
+            </textarea>
+        </div>
+    </form>
+</div>
+{% endblock %}

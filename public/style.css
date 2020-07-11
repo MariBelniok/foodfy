@@ -15,10 +15,11 @@ a:hover{
 }
 
 /* MENU */
+.admin-create-container,
+.admin-infos,
 #header-container{
     max-width: 800px;
     margin: 0 auto;
-    
 }
 .menu{
     display: flex;
@@ -183,9 +184,7 @@ a:hover{
 .info-content p{
     font-size: 20px;
     color: #777777;
-
 }
-
 .info-prepare h3{
     font-size: 24px;
     margin: 30px 0 20px;
@@ -218,4 +217,134 @@ a:hover{
 }
 .info-prepare p{
     margin-bottom: 20px;
+}
+
+/* ADMIN STYLES */
+.menu-admin{
+    padding: 30px 0;
+    background-color: #ddd;
+}
+.menu-admin img{
+    margin-left: 19%;
+}
+.admin-middle-container{
+    width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+.admin-middle-container h1{
+    margin: 50px 0;
+    font-size: 24px;
+}
+.admin-middle-container .admin-cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+.admin-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+}
+.index-info a{
+    position: absolute;
+    bottom: 10px;
+}
+.admin-middle-container .admin-card img{
+    width: 95%;
+    height: 100px;
+    border-radius: 8px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+.admin-middle-container .admin-card h3{
+    font-size: 18px;
+    font-weight: normal;
+}
+.admin-middle-container .admin-card p{
+    font-size:14px;
+    color: #777;
+    margin: 5px 0 10px;
+}
+.admin-middle-container .admin-card a{
+    font-size:14px;
+    color: #6558C3;
+    font-weight: bold;
+}
+/* CREATE */
+.admin-create-container{
+    position: relative;
+}
+.admin-infos,
+.admin-create-head{
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+}
+.btn-new,
+.admin-infos a,
+.admin-create-head button[type="submit"],
+.delete-btn button[type="submit"]{
+    display: inline-block;
+    background-color: #6558C3;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+}
+.btn-new{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.btn-new:hover{
+    text-decoration: none;
+}
+.admin-create-container .delete-btn button[type="submit"] {
+    background-color:#DC4747;
+    position: absolute;
+    right: 20%;
+    top: 48px;
+}
+.admin-infos h1,
+.admin-create-container h1{
+    font-size: 24px;
+    margin: 50px 0 30px;
+}
+.admin-create-container form{
+    width: 100%;
+}
+.admin-create-container .form-item{
+    margin: 30px 0;
+}
+.admin-create-container .form-item div{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.admin-create-container form input,
+.admin-create-container form textarea{
+    border: 1px solid #DDDDDD;
+    width: 100%;
+}
+.admin-create-container form input{
+    height: 50px;
+}
+.admin-create-container form button[type="button"]{
+    display: block;
+    color: #6558C3;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+    background: transparent;
+}
+/* RECIPE DETAILS */
+.admin-infos a:hover{
+    text-decoration: none;
 }

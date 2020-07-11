@@ -1,0 +1,30 @@
+{% extends 'user/layout.njk' %}
+{% block head %}
+<title>Foodfy - {{ item.name }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="infos">
+    <div class="info-recipe" id="{{item.id}}">
+        <div class="info-content">
+            <img src="{{ item.image }}" alt="Receita {{ item.name }}">
+            <h2>{{ item.name }}</h2>
+            <p>{{ item.author }}</p>
+        </div>
+        <div class="info-prepare">
+        <h3>Ingredientes <span class="toggle-btn">ESCONDER</span> </h3>
+            <ul class="toggle-item active">
+            {% for ingredient in item.ingredients%}
+            <li>{{ ingredient }}</li>
+            {% endfor %}
+            </ul>
+        <h3>Modo de Preparo <span class="toggle-btn">ESCONDER</span></h3>
+        <p class="toggle-item active">{{ item.prepare }}</p>
+        <h3>Informações Adicionais <span class="toggle-btn">ESCONDER</span></h3>
+        <p class="toggle-item active">{{ item.info }}</p>
+        </div>
+    </div>
+</div>
+</div>
+<script src="/scripts.js"></script>
+{% endblock %}
