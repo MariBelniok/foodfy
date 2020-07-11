@@ -31,7 +31,6 @@
 
 <br>
 
-<<<<<<< HEAD
 ##  📌 How to use
 
 ```bash
@@ -40,11 +39,6 @@ $ cd foodfy
 $ npm install express
 $ npm start
 ```
-=======
-### Challange that is developing during the bootcamp Launch Base by Rocketseat.
-
-#### New commits will come soon
->>>>>>> 842dcaee6a079ee03fa7fce4adafc469bdb0e3d1
 
 <br>
 
@@ -74,8 +68,4 @@ $ npm start
 <br>
 <hr>
 
-<<<<<<< HEAD
 <h3 align="center"> Made with 🧡  by Marianna Belniok   </h3>
-=======
-<p align="center"> Made with 🧡 by Marianna Belniok</p>
->>>>>>> 842dcaee6a079ee03fa7fce4adafc469bdb0e3d1
