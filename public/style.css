@@ -17,6 +17,7 @@ a:hover{
 /* MENU */
 .admin-create-container,
 .admin-infos,
+.info-recipe,
 #header-container{
     max-width: 800px;
     margin: 0 auto;
@@ -82,6 +83,8 @@ a:hover{
     border-radius: 15px;
     margin-top: 20px;
     cursor: pointer;
+    height: 140px;
+    object-fit: cover;
 }
 .middle-container .card h3{
     font-size: 18px;
@@ -222,10 +225,23 @@ a:hover{
 /* ADMIN STYLES */
 .menu-admin{
     padding: 30px 0;
-    background-color: #ddd;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
-.menu-admin img{
-    margin-left: 19%;
+.menu-admin a{
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #999;
+    font-weight: bold;
+}
+.menu-admin a + a{
+    margin-right: 30px;
+}
+.menu-admin a img{
+    margin: auto 50px auto 285px;
 }
 .admin-middle-container{
     width: 800px;
@@ -240,6 +256,7 @@ a:hover{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
+
 }
 .admin-card{
     display: grid;
@@ -327,13 +344,17 @@ a:hover{
     font-weight: bold;
     margin-bottom: 10px;
 }
-.admin-create-container form input,
+.admin-create-container .form-item select,
+.admin-create-container .form-item input,
 .admin-create-container form textarea{
     border: 1px solid #DDDDDD;
     width: 100%;
+    outline: none;
 }
-.admin-create-container form input{
+.admin-create-container .form-item select,
+.admin-create-container .form-item input{
     height: 50px;
+    background-color: transparent;
 }
 .admin-create-container form button[type="button"]{
     display: block;
@@ -347,4 +368,65 @@ a:hover{
 /* RECIPE DETAILS */
 .admin-infos a:hover{
     text-decoration: none;
+}
+/* CHEFS INDEX */
+.admin-cards{
+    margin-bottom: 50px;
+}
+.chefs-list{
+    width: 800px;
+    margin: 50px auto;
+}
+.chefs-list h1{
+    font-size: 24px;
+}
+.chefs-card{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px;
+}
+.chefs-cards{
+    display: flex;
+    align-items: center;
+}
+.chefs-cards img{
+    float: left;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.chefs-cards h3{
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.chefs-cards a{
+    font-size: 14px;
+    color: #6558C3;
+    font-weight: bold;
+}
+
+
+/* SHOW CHEFS */
+.show-chef{
+    width: 100%;
+    margin: 50px auto;
+    text-align: center;
+}
+.show-chef img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.show-chef h1{
+    font-size: 36px;
+    margin: 30px auto 4px;
+}
+.show-chef p{
+    font-size: 20px;
+    color: #777;
 }

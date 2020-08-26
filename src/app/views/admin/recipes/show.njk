@@ -1,0 +1,35 @@
+{% extends "admin/layout.njk" %}
+{% block head %}
+<title>Admin - {{ item.title }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="admin-infos">
+    <h1>Receita {{ item.name }}</h1> 
+    <a href="/admin/{{ item.id }}/edit">Editar receita</a>
+</div>   
+<div class="info-recipe" id="{{item.id}}">
+    <div class="info-content">
+        <img src="{{ item.image }}" alt="Receita {{ item.title }}">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.chef_name }}</p>
+    </div>
+    <div class="info-prepare">
+    <h3>Ingredientes</h3>
+        <ul class="toggle-item active">
+            {% for ingredient in item.ingredients%}
+            <li>{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+    <h3>Modo de Preparo</h3>
+        <ul class="toggle-item active">
+            {% for prepare in item.prepare %}
+            <li>{{ prepare }}</li>
+            {% endfor %}
+        </ul>
+    <h3>Informações Adicionais</h3>
+    <p class="toggle-item active">{{ item.info }}</p>
+    </div>
+</div>
+
+{% endblock %}

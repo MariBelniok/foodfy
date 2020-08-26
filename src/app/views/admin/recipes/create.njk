@@ -4,40 +4,47 @@
 {% endblock %}
 {% block content %}
 <div class="admin-create-container">
-    <form action="/admin" method="POST">
+    <form action="/admin/recipes" method="POST">
         <div class="admin-create-head">
-            <h1>Criando receita </h1> 
-            <button type="submit">Salvar receita</button> 
+                <h1>Criando receita </h1> 
+                <input type="hidden" name="id" value="{{item.id}}">
+                <button type="submit">Salvar receita</button> 
         </div>
         <div class="form-item">
-            <div>Autor da Receita</div>
-            <input type="text" name="author">
-        </div>
-         <div class="form-item">
-            <div>Nome da Receita</div>
-            <input type="text" name="name">
+        <div>Chef</div>
+            <select name="chef_id">
+                {% for chef in chefsOptions %}
+                    <option value="{{chef.id}}">
+                        {{chef.name}}
+                    </option>
+                {% endfor %}
+            </select>
         </div>
         <div class="form-item">
             <div>Imagem da Receita</div>
             <input type="url" name="image" placeholder="HTTP://">
         </div>
+        <div class="form-item">
+            <div>Nome da Receita</div>
+            <input type="text" name="title">
+        </div>
         <div class="form-item" id="ingredients">
             <div>Ingredientes</div>
             <div class="ingredient">
-                <input type="text" name="ingredients[]" value="">
+                <input type="text" name="ingredients[]">
             </div>
         </div>
         <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
         <div class="form-item" id="prepares">
             <div>Modo de Preparo</div>
             <div class="prepare">
-                <input type="text" name="prepare[]" value="">
+                <input type="text" name="prepare[]">
             </div>
         </div>
         <button type="button" class="add-prepare">Adicionar novo passo</button>
         <div class="form-item">
             <div>Informações Adicionais</div>
-            <textarea name="info" id="" cols="60" rows="20">
+            <textarea name="info" id="info" cols="60" rows="20"> 
             </textarea>
         </div>
     </form>

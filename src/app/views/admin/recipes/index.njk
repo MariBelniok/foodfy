@@ -4,14 +4,13 @@
     
     <section class="admin-middle-container">
         <h1>Gerenciar Receitas</h1>
-        <a class="btn-new"href="/admin/create">Nova</a>
         <div class="admin-cards">
             {%for item in items %}
             <div class="admin-card" id="{{item.id}}">
-                <img src="{{ item.image }}" alt="Receita {{ item.name }}">
+                <img src="{{ item.image }}" alt="Receita {{ item.title }}">
                 <div class="index-info">
-                    <h3>{{ item.name }}</h3>
-                    <p>{{ item.author }}</p>
+                    <h3>{{ item.title }}</h3>
+                    <p>por {{ item.chef_name }}</p>
                     <a href="/admin/{{ item.id }}">Visualizar</a>
                 </div>
                 

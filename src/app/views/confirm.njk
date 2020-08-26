@@ -1,0 +1,9 @@
+<script>
+    const btnDelete = document.querySelector('#delete-btn')
+    btnDelete.addEventListener('submit',(e) => {
+        const confirmation = confirm("Deletar essa receita?")
+        if(!confirmation){
+            e.preventDefault()
+        }
+    })
+</script>
