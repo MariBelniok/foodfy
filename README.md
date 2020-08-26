@@ -36,7 +36,7 @@
 ```bash
 $ git clone https://github.com/MariBelniok/foodfy
 $ cd foodfy
-$ npm install express
+$ npm install
 $ npm start
 ```
 
