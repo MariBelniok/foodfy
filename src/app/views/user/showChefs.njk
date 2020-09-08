@@ -1,0 +1,30 @@
+{% extends "user/layout.njk" %}
+{% block head %}
+<title>Admin - {{ chef.name }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="admin-infos">
+    <h1>Chef: {{ chef.name }}</h1> 
+</div>
+<div class="show-chef">
+    <img src="{{chef.avatar_url}}" alt="">
+    <h1>{{chef.name}}</h1>
+    <p>{{ chef.total_recipes }} receitas</p>
+</div>
+<section class="admin-middle-container">
+    <div class="admin-cards">
+        {%for recipe in items %}
+        <div class="admin-card" id="{{recipe.id}}">
+            <img src="{{ recipe.image }}" alt="Receita {{ recipe.title }}">
+            <div class="index-info">
+                <h3>{{ recipe.title }}</h3>
+                <p>por {{ recipe.chefs_name }}</p>
+                <a href="/info/{{ recipe.id }}">Visualizar</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+</div>
+{% endblock %}

@@ -11,7 +11,7 @@
 <div class="show-chef">
     <img src="{{chef.avatar_url}}" alt="">
     <h1>{{chef.name}}</h1>
-    <p>{{ items.total_recipes }} receitas</p>
+    <p>{{ chef.total_recipes }} receitas</p>
 </div>
 <section class="admin-middle-container">
         <div class="admin-cards">
@@ -21,7 +21,7 @@
                 <div class="index-info">
                     <h3>{{ recipe.title }}</h3>
                     <p>por {{ recipe.chefs_name }}</p>
-                    <a href="/admin/{{ recipe.id }}">Visualizar</a>
+                    <a href="/admin/recipes/{{ recipe.id }}">Visualizar</a>
                 </div>
             </div>
             {% endfor %}

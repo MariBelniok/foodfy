@@ -16,11 +16,13 @@ module.exports = {
         const keys = Object.keys(req.body)
 
         for(key of keys){
-            if(req.body[key] == "")
+            if(req.body[key] == ""){
+                console.log("req.body")
                 return res.send('Please, fill all the form')
+            }
         }
         Recipe.create(req.body, item =>{
-            return res.redirect(`/admin/recipes/${item.id}`)
+            return res.redirect(`/admin/recipes/${item}`)
         })
     },
     show(req, res){
@@ -52,7 +54,7 @@ module.exports = {
     },
     delete(req, res){
         Recipe.delete(req.body.id, ()=>{
-            return res.redirect("/admin/recipes/index")
+            return res.redirect("/admin/recipes")
         })
     }
 }

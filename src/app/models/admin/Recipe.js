@@ -27,7 +27,7 @@ module.exports = {
             RETURNING id
         `
         const values = [
-            data.chef_id,
+            data.chef,
             data.image,
             data.title,
             data.ingredients,
@@ -38,7 +38,7 @@ module.exports = {
 
         db.query(query, values, (err, results) => {
             if (err) throw `Database ${err}`
-            callback(results.rows)
+            callback(results.rows[0].id)
         })
     },
     find(id, callback){
@@ -56,14 +56,16 @@ module.exports = {
             UPDATE recipes SET
                 chef_id=($1),
                 image=($2),
-                ingredients=($3),
-                prepare=($4),
-                info=($5)
-            WHERE id=$6
+                title=($3),
+                ingredients=($4),
+                prepare=($5),
+                info=($6)
+            WHERE id=$7
         `
         const values = [
-            data.chef_id,
+            data.chef,
             data.image,
+            data.title,
             data.ingredients,
             data.prepare,
             data.info,

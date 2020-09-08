@@ -25,16 +25,13 @@ module.exports = {
     },
     show(req, res){ 
         Chef.find(req.params.id, chef => {
-            if(!chef) return res.send('chef not found')
-                
-            Chef.findTotalRecipes(chef.id, item => {
-                
-                Chef.findRecipes(chef.id, items => {
-                    chef.created_at = date(chef.created_at).format
-                
-                    return res.render('admin/chefs/show', {chef, item, items})
-                })                
-            })
+            if(!chef) return res.send('chef not found')  
+            Chef.findRecipes(chef.id, items => {
+                chef.created_at = date(chef.created_at).format
+            
+                return res.render('admin/chefs/show', {chef, items})
+            })                
+            
         })
     },
     edit(req, res){

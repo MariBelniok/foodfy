@@ -5,6 +5,7 @@
 }
 body{
     font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 a{
     text-decoration: none;
@@ -21,6 +22,7 @@ a:hover{
 #header-container{
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
 }
 .menu{
     display: flex;
@@ -28,12 +30,21 @@ a:hover{
     margin: 40px 0;
 }
 .menu img{
-    margin-right: 100px;
+    margin-right: 70px;
 }
 .menu a{ 
-    margin-right: 40px;
+    margin-right: 30px;
 }
-
+.menu .filter{
+    position: absolute;
+    right: 0;
+}
+.menu .filter form input{
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding: 10.5px 20px;
+    font-size: 14px;
+}
 /* BANNER */
 .banner{
     display: flex;
@@ -147,13 +158,15 @@ a:hover{
 
 /* FOOTER */
 .footer-container{
-    margin-top: 60px;
+    display: block;
+    margin-top: 100px;
     background-color: #EEEEEE;
     color: #999999;
     text-align: center;
+    width: 100%;
 }
 .footer-container p{
-    padding: 40px;
+    padding: 20px;
 }
 
 
@@ -255,8 +268,8 @@ a:hover{
 .admin-middle-container .admin-cards{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
-
+    gap: 20px 70px;
+    
 }
 .admin-card{
     display: grid;
@@ -300,6 +313,7 @@ a:hover{
     align-items: baseline;
     justify-content: space-between;
 }
+.menu .filter button,
 .btn-new,
 .admin-infos a,
 .admin-create-head button[type="submit"],
@@ -339,7 +353,9 @@ a:hover{
 .admin-create-container .form-item{
     margin: 30px 0;
 }
-.admin-create-container .form-item div{
+.admin-create-container .form-item div,
+.admin-create-container .form-item label{
+    display: block;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -371,11 +387,11 @@ a:hover{
 }
 /* CHEFS INDEX */
 .admin-cards{
-    margin-bottom: 50px;
+    margin-bottom: 150px;
 }
 .chefs-list{
     width: 800px;
-    margin: 50px auto;
+    margin: 50px auto 32%;
 }
 .chefs-list h1{
     font-size: 24px;

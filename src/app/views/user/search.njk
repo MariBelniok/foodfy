@@ -1,10 +1,11 @@
-{% extends 'user/layoutFilter.njk' %}
+{% extends "user/layoutFilter.njk"%}
 
 {% block head %}
-    <title>Foodfy - Receitas</title>
+    <title>Foodfy - Buscando</title>
 {% endblock %}
 
 {% block content %}
+<h2>Buscando por "{{ filter }}"</h2>
 <section class="middle-container">
     <div class="cards">
         {%for item in items %}

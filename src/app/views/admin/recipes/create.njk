@@ -7,12 +7,11 @@
     <form action="/admin/recipes" method="POST">
         <div class="admin-create-head">
                 <h1>Criando receita </h1> 
-                <input type="hidden" name="id" value="{{item.id}}">
                 <button type="submit">Salvar receita</button> 
         </div>
         <div class="form-item">
         <div>Chef</div>
-            <select name="chef_id">
+            <select name="chef">
                 {% for chef in chefsOptions %}
                     <option value="{{chef.id}}">
                         {{chef.name}}
@@ -22,7 +21,7 @@
         </div>
         <div class="form-item">
             <div>Imagem da Receita</div>
-            <input type="url" name="image" placeholder="HTTP://">
+            <input type="text" name="image" placeholder="HTTP://">
         </div>
         <div class="form-item">
             <div>Nome da Receita</div>
@@ -43,8 +42,8 @@
         </div>
         <button type="button" class="add-prepare">Adicionar novo passo</button>
         <div class="form-item">
-            <div>Informações Adicionais</div>
-            <textarea name="info" id="info" cols="60" rows="20"> 
+            <label for="info">Informações Adicionais</label>
+            <textarea name="info" id="info" cols="40" rows="10"> 
             </textarea>
         </div>
     </form>

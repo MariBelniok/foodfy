@@ -2,22 +2,61 @@ const User = require('../models/User')
 
 module.exports = {
     index(req, res){
-        return res.render('user/index')
+        const { filter } = req.query
+        if(filter){
+            User.findBy(filter, items => {
+                return res.render('user/index', {items})
+            })
+        }else{
+            User.all(items => {
+                return res.render('user/index', {items})
+            })
+        } 
     },
     about(req, res){
         return res.render('user/about')
     },
     recipes(req, res){
-        return res.render('user/recipes')
+        const { filter } = req.query
+        if(filter){
+            User.findBy(filter, items => {
+                return res.render('user/recipes', {items})
+            })
+        }else{
+            User.all(items => {
+                return res.render('user/recipes', {items})
+            })
+        } 
+    },
+    chefs(req, res){
+        User.allChefs(chefs => {
+            return res.render('user/chefs', {chefs})
+        })
+    },
+    showChef(req, res){
+        User.findChefs(req.params.id, chef => {
+            User.findRecipes(chef.id, items => {
+                return res.render('user/showChefs', {chef, items})
+            })
+        })
     },
     info(req, res){
-        const { id }  = req.params
-        const info = data.recipes.find(function (info) {
-        return info.id == id
+        User.find(req.params.id, item => {
+            if(!item) {
+                return res.send("Receita não encontrada!")
+            }
+            return res.render('user/info', { item })
         })
-        if(!info) {
+    },
+    search(req, res){
+        const { filter } = req.query
+
+        if(filter){
+            User.findBy(filter, items => {
+                return res.render('user/search', {filter, items})
+            })
+        }else{
             return res.send("Receita não encontrada!")
         }
-        return res.render('user/info', { item })
     }
 }

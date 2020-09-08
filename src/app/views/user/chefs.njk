@@ -1,0 +1,22 @@
+{% extends "user/layout.njk" %}
+{% block head %}
+<title>Admin - {{ chefs.name }}</title>
+{% endblock %}
+
+{% block content %}
+    <div class="chefs-list">
+    <h1>Chefs</h1>
+    <div class="chefs-card">
+    
+    {%for chef in chefs %}
+        <div class="chefs-cards" id="{{chef.id}}">
+            <img src="{{ chef.avatar_url }}" alt="Receita {{ chef.name }}">
+            <div class="chef-details">
+            <h3>{{ chef.name }}</h3>
+            <a href="/chefs/{{ chef.id }}">Visualizar</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+{% endblock %}

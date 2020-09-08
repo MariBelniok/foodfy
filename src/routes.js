@@ -10,6 +10,9 @@ routes.get('/', (req, res) => {
 routes.get('/index', user.index)
 routes.get('/about', user.about)
 routes.get('/recipes', user.recipes)
+routes.get('/chefs', user.chefs)
+routes.get('/search', user.search)
+routes.get('/chefs/:id', user.showChef)
 routes.get('/info/:id', user.info)
 
 
