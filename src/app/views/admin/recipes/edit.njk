@@ -11,53 +11,14 @@
         </div>
     </form>
 
-    <form  method="POST" action="/admin/recipes/?_method=PUT" >
+    <form  method="POST" action="/admin/recipes/?_method=PUT" enctype="multipart/form-data">
         <div class="admin-create-head">
             <h1>Editando receita </h1> 
             <input type="hidden" name="id" value="{{item.id}}">
             <button type="submit">Salvar receita</button> 
         </div>
-        <div class="form-item">
-    <div>Chef</div>
-        <select name="chef_id">
-            {% for chef in chefsOptions %}
-                <option value="{{chef.id}}"
-                {% if item.chef_id == chef.id %} selected {% endif %}>
-                    {{chef.name}}
-                </option>
-            {% endfor %}
-        </select>
-</div>
-<div class="form-item">
-    <div>Imagem da Receita</div>
-    <input type="url" name="image" placeholder="HTTP://" value={{item.image}}>
-</div>
-<div class="form-item">
-    <div>Nome da Receita</div>
-    <input type="text" name="title" value={{item.title}}>
-</div>
-<div class="form-item" id="ingredients">
-    <div>Ingredientes</div>
-    <div class="ingredient">
-        <input type="text" name="ingredients[]" value={{item.ingredients}}>
-    </div>
-</div>
-<button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
-<div class="form-item" id="prepares">
-    <div>Modo de Preparo</div>
-    <div class="prepare">
-        <input type="text" name="prepare[]" value={{item.prepare}}>
-    </div>
-</div>
-<button type="button" class="add-prepare">Adicionar novo passo</button>
-<div class="form-item">
-    <div>Informações Adicionais</div>
-    <textarea name="info" id="info" cols="60" rows="20"> 
-        {{item.info}}
-    </textarea>
-</div>
+        {% include "admin/recipes/fields.njk"%}
     </form>
-    
 </div>
 
 {% include "confirm.njk" %}

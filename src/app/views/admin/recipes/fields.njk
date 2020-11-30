@@ -1,0 +1,65 @@
+<div class="form-item">
+<div>Chef</div>
+    <select name="chef_id">
+        {% for chef in chefsOptions %}
+            <option value="{{chef.id}}"
+            {% if item.chef_id == chef.id %} selected {% endif %}>
+                {{chef.name}}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+<div class="form-item">
+    <div>Imagem da Receita</div>
+    <div class="container-img">
+        <div id="images-upload">
+        <input 
+        id="images-input"
+        type="file" 
+        name="image" 
+        multiple
+        accept="image/*"
+        onchange="ImagesUpload.handleFileInput(event)"
+        >
+        <i class="material-icons">add</i>
+        </div>
+
+        <div id="images-preview">
+            {% if files %}
+                {% for image in files %}
+                    <div class="image">
+                        <img src="{{image.src}}" alt="{{image.name}}">
+                        <i 
+                            class="material-icons"
+                            onclick="ImagesUpload.removeOldImages(event)"
+                        >
+                        close 
+                        </i>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="form-item">
+    <div>Nome da Receita</div>
+    <input type="text" name="title" value={{item.title}}>
+</div>
+<div class="form-item" id="ingredients">
+    <div>Ingredientes</div>
+    <div class="ingredient">
+        <input type="text" name="ingredients[]" value={{item.ingredients}}>
+    </div>
+</div>
+<button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+<div class="form-item" id="prepares">
+    <div>Modo de Preparo</div>
+    <div class="prepare">
+        <input type="text" name="prepare[]" value={{item.prepare}}>
+    </div>
+</div>
+<button type="button" class="add-prepare">Adicionar novo passo</button>
+<div class="form-item">
+    <div>Informações Adicionais</div>
+    <textarea name="info" id="info" cols="60" rows="20">{{item.info}}</textarea>
+</div>
