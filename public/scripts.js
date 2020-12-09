@@ -45,21 +45,78 @@ const AddButton = {
         prepare.appendChild(newField)
     }
 }
-document.querySelector(".add-ingredient").addEventListener("click", AddButton.addIngredient)
-document.querySelector(".add-prepare").addEventListener("click", AddButton.addPrepare)
+
+
+//PAGINATION
+function paginate(selectedPage, totalPages) {
+    let pages = []
+    let oldPage
+  
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      const firstAndLastPage = currentPage == 1 || currentPage == totalPages
+      const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+      const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
+  
+        if (firstAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
+
+        if (oldPage && currentPage - oldPage > 2) {
+            pages.push("...")
+        }
+
+        if (oldPage && currentPage - oldPage == 2) {
+            pages.push(oldPage + 1)
+        }
+
+        pages.push(currentPage)
+
+        oldPage = currentPage
+        }
+    }
+    return pages
+}
+  
+function createPagination(pagination) {
+
+    const page = +pagination.dataset.page
+    const total = +pagination.dataset.total
+    const filter = pagination.dataset.filter
+
+    const pages = paginate(page, total) 
+
+    let elements = ""
+
+    for(let page of pages){
+        if(String(page).includes("...")){
+            elements += `<span>${page}</span>`
+        }else{
+            if(filter){
+                elements += `<a href="?page=${page}&filter=${filter}">${page}</a>`
+            }else{
+                elements += `<a href="?page=${page}">${page}</a>`
+            }
+        }
+    }
+    pagination.innerHTML = elements
+}
+
+const pagination = document.querySelector(".pagination")
+
+if(pagination){
+    createPagination(pagination)
+}
+
 
 
 //IMAGES UPLOAD
 const ImagesUpload = {
         input: "",
         preview: document.querySelector("#images-preview"),
-        uploadLimit: 5,
         files: [],
-    handleFileInput(event){
+    handleFileInput(event, limit){
         const { files: fileList } = event.target
         ImagesUpload.input = event.target
 
-        if(ImagesUpload.hasLimit(event)) return
+        if(ImagesUpload.hasLimit(event, limit)) return
 
         Array.from(fileList).forEach(file => {
             ImagesUpload.files.push(file)
@@ -77,12 +134,12 @@ const ImagesUpload = {
         })
         ImagesUpload.input.files = ImagesUpload.getAllFiles()
     },
-    hasLimit(event){
-        const { uploadLimit, input, preview } = ImagesUpload
+    hasLimit(event, limit){
+        const { input, preview } = ImagesUpload
         const { files: fileList } = input
 
-        if(fileList.length > uploadLimit){
-            alert(`Envie no máximo ${uploadLimit} fotos`)
+        if(fileList.length > limit){
+            alert(`Envie no máximo ${limit} fotos`)
             event.preventDefault()
             return true
         }
@@ -94,7 +151,7 @@ const ImagesUpload = {
         })
 
         const totalImages = fileList.length + imagesDiv.length
-        if(totalImages > uploadLimit){
+        if(totalImages > limit){
             alert(`Você atingiu o limite máximo de fotos`)
             event.preventDefault()
             return true

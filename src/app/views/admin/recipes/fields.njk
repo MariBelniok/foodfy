@@ -14,12 +14,12 @@
     <div class="container-img">
         <div id="images-upload">
         <input 
-        id="images-input"
-        type="file" 
-        name="image" 
-        multiple
-        accept="image/*"
-        onchange="ImagesUpload.handleFileInput(event)"
+            id="images-input"
+            type="file" 
+            name="image" 
+            multiple
+            accept="image/*"
+            onchange="ImagesUpload.handleFileInput(event, 5)"
         >
         <i class="material-icons">add</i>
         </div>
@@ -37,6 +37,7 @@
                         </i>
                     </div>
                 {% endfor %}
+                <input type="hidden" name="removed_files"/>
             {% endif %}
         </div>
     </div>
@@ -51,14 +52,26 @@
         <input type="text" name="ingredients[]" value={{item.ingredients}}>
     </div>
 </div>
-<button type="button" class="add-ingredient">Adicionar novo ingrediente</button>
+<button 
+    type="button" 
+    class="add-ingredient"
+    onclick="AddButton.addIngredient()"
+>
+Adicionar novo ingrediente
+</button>
 <div class="form-item" id="prepares">
     <div>Modo de Preparo</div>
     <div class="prepare">
         <input type="text" name="prepare[]" value={{item.prepare}}>
     </div>
 </div>
-<button type="button" class="add-prepare">Adicionar novo passo</button>
+<button 
+    type="button" 
+    class="add-prepare"
+    onclick="AddButton.addPrepare()"
+>
+Adicionar novo passo
+</button>
 <div class="form-item">
     <div>Informações Adicionais</div>
     <textarea name="info" id="info" cols="60" rows="20">{{item.info}}</textarea>

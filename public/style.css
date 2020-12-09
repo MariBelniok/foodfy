@@ -75,7 +75,7 @@ a:hover{
     width: 50%;
 }
 
-/* CARDS */
+/* RECIPES CARDS */
 .middle-container{
     width: 950px;
     margin: 0 auto;
@@ -107,6 +107,29 @@ a:hover{
     line-height: 24px;
     color: #777777;
 }
+/* PAGINATION */
+
+.pagination{
+    margin: 10 auto;
+    align-self: end;
+    text-align: center;
+    justify-self: center;
+    padding-bottom: 40px;
+    height: 10px;
+    padding-top: 25px;
+  }
+  
+  .pagination a, 
+  .pagination span {
+    color: black;
+    text-decoration: none;
+    margin-right: 16px;
+  }
+  
+  .pagination a:hover {
+    filter: brightness(0.4);
+    border-bottom: 1px solid black;
+  }
 
 /* MODAL */
 .modal-overlay{
@@ -405,6 +428,7 @@ a:hover{
 
     display: block;
     overflow: hidden;
+    width: 145px;
 }
 .form-item #images-upload i{
     width: 100%;
@@ -438,8 +462,6 @@ a:hover{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 8px;
-
-
 }
 #images-preview img{
     width: 150px;
@@ -473,11 +495,6 @@ a:hover{
 }
 #images-preview .image i:hover{
     opacity: 1;
-}
-
-/* CHEF AVATAR UPLOAD */
-.form-item #avatar-input {
-
 }
 
 

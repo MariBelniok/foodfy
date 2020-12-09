@@ -1,17 +1,39 @@
 const User = require('../models/User')
+const Recipe = require('../models/admin/Recipe')
 
 module.exports = {
-    index(req, res){
-        const { filter } = req.query
-        if(filter){
-            User.findBy(filter, items => {
-                return res.render('user/index', {items})
-            })
-        }else{
-            User.all(items => {
-                return res.render('user/index', {items})
-            })
-        } 
+    async index(req, res){
+        try {
+            let { filter } = req.query
+
+            const params = {
+                limit: 6,
+                offset: 0,
+                filter
+            }
+            let items = (await Recipe.paginate(params)).rows
+            const recipesTemp = []
+
+            for(const item of items){
+                let files = (await Recipe.files(item.id)).rows
+                
+                files = files.map(file => ({
+                    ...file,
+                    src: `${req.protocol}://${req.headers.host}${file.path.replace('public', '')}`
+                }))
+
+                recipesTemp.push({
+                    ...items,
+                    images: files
+                })
+            }
+            items = recipesTemp
+
+            return res.render('user/index', {items})
+
+        }catch(error){
+            throw new Error(error)
+        }
     },
     about(req, res){
         return res.render('user/about')

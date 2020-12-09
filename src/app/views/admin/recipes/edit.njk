@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 <div class="admin-create-container">
-    <form method="POST" action="/admin/recipes/?_method=DELETE" id="delete-btn">
+    <form method="POST" action="/admin/recipes/?_method=DELETE" id="delete-btn" >
         <div class="delete-btn">
             <input type="hidden" name="id" value="{{item.id}}">
             <button type="submit">Deletar</button> 

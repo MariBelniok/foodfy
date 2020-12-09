@@ -6,7 +6,7 @@ module.exports = {
             const query = `
                 INSERT INTO files(
                 name,
-                path,
+                path
                 )VALUES($1, $2)
                 RETURNING id
             `
@@ -19,5 +19,37 @@ module.exports = {
         }catch(error){
             throw new Error(error)
         }
-    }
+    },
+    createRecipeFiles({ recipe_id, file_id }) {
+        try {
+            const query = `
+                INSERT INTO recipe_files(
+                recipe_id,
+                file_id
+                )VALUES($1, $2)
+                RETURNING id
+            `
+            const values = [
+                recipe_id, 
+                file_id
+            ]
+    
+            return db.query(query, values)
+        }catch(error){
+            throw new Error(error)
+        }
+    },
+    find(id) {
+        try {
+          return db.query(
+            `
+                SELECT *
+                FROM files
+                WHERE id = $1`,
+            [id]
+          );
+        } catch (error) {
+          throw new Error(error);
+        }
+    },
 }
