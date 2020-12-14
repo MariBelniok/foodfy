@@ -29,7 +29,7 @@ module.exports = {
                 RETURNING id
             `
             const values = [
-                data.chef,
+                data.chef_id,
                 data.title,
                 data.ingredients,
                 data.prepare,

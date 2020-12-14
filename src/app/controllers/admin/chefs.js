@@ -32,30 +32,30 @@ module.exports = {
         }
     },
     async post(req, res){
-        try{
-            const keys = Object.keys(req.body)
-    
-            for(key of keys){
-                if(req.body[key] == "" && key != "removed_files"){
-                    return res.send(`Please, fill all the form`)
-                }
+        
+        const keys = Object.keys(req.body)
+        
+        for(key of keys){
+            if(req.body[key] == "" && key != "removed_files"){
+                return res.send(`Please, fill all the form`)
             }
+        }
+        
+        if(req.files === 0){
+            return res.send('Por favor, envie pelo menos uma foto')
+        }
 
-            if(!req.file){
-                return res.send('Por favor, envie pelo menos uma foto')
-            }
+        try{    
+            const filesPromise = req.files.map(file => File.create({...file}))
 
-            let results = await File.create(req.file)
-            const fileId = results[0].rows[0].id
+            let results = await filesPromise[0]
+            const fileId = results.rows[0].id
+            
 
-            const createChef = {
-                ...req.body.name,
-                file_id: fileId
-            }
+            const chefId = (await Chef.create({...req.body, file_id: fileId})).rows[0].id
 
-            const chefId = (await Chef.create(createChef)).rows[0].id
 
-            return res.redirect(`/admin/chefs/${chefId}`)
+            return res.redirect(`/admin/chefs/create`)
 
         }catch(error){
             throw new Error(error)

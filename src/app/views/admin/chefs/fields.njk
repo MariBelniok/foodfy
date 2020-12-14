@@ -11,24 +11,27 @@
             type="file" 
             name="image" 
             accept="image/*"
+            multiple
+            value="image.src"
             onchange="ImagesUpload.handleFileInput(event, 1)"
         >
         <p class="btn">Enviar avatar</p>
     </div>
 
     <div id="images-preview">
-        {% if image %}
-            <div class="image" id={{image.id}}>
-                <img src="{{image.src}}" alt="{{image.name}}">
-                <i 
-                    class="material-icons"
-                    onclick="ImagesUpload.removeOldImages(event)"
-                >
-                close 
-                </i>
-            </div>
+        {% if files %}
+            {% for image in files %}
+                <div class="image" id={{image.id}}>
+                    <img src="{{image.src}}" alt="{{image.name}}">
+                    <i 
+                        class="material-icons"
+                        onclick="ImagesUpload.removeOldImages(event)"
+                    >
+                    close 
+                    </i>
+                </div>
+            {% endfor %}
             <input type="hidden" name="removed_files"/>            
         {% endif %}
     </div>
 </div>
-         

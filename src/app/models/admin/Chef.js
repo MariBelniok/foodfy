@@ -15,18 +15,20 @@ module.exports = {
             throw new Error(error)
         }
     },
-    create(data){
+    create({name, file_id}){
         try{
             const query = `
                 INSERT INTO chefs(
                 name,
+                created_at,
                 file_id
-                )VALUES($1, $2)
+                )VALUES($1, $2, $3)
                 RETURNING id
                 `
             const values = [
-                data.name,
-                data.file_id
+                name,
+                date(Date.now()).iso,
+                file_id
             ]
             return db.query(query, values)
         }catch(error){
