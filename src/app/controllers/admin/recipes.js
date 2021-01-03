@@ -92,10 +92,21 @@ module.exports = {
     async show(req, res){
         try{
             let results = await Recipe.find(req.params.id)
-            const item = results.rows[0]
+            let item = results.rows[0]
+            let files = (await File.findRecipeFiles(item.id)).rows
+
+            files = files.map((file) => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+            }))
             if(!item) return res.send('Recipe not found')
+
+            item = {
+                ...item,
+                files
+            }
     
-            return res.render('admin/recipes/show', {item})
+            return res.render('admin/recipes/show', { item, images: item.files})
         }catch(error){
             throw new Error(error)
         }   
@@ -103,9 +114,21 @@ module.exports = {
     async edit(req, res) {
         try{
             let results = await Recipe.find(req.params.id)
-            const item = results.rows[0]
+            let item = results.rows[0]
 
             if(!item) return res.send('Recipe not found')
+
+            let files = (await Recipe.files(item.id)).rows
+
+            files = files.map(file => ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+            }))
+
+            item = {
+                ...item,
+                images: files
+            }
 
             const options =(await Recipe.chefSelectOptions()).rows
             return res.render("admin/recipes/edit", {item, chefsOptions: options})
@@ -118,14 +141,35 @@ module.exports = {
             const keys = Object.keys(req.body)
 
             for(key of keys){
-                if(req.body[key] == "")
+                if(req.body[key] == "" && key != "removed_files")
                     return res.send('Please, fill all the form')
             }
 
             if(req.files.length != 0){
-                const newFilesPromise = req.files.map(file => File.create({...file, product_id: req.body.id}))
+                const newFilesPromise = req.files.map(file => File.create({...file}))
+                const filesId = await Promise.all(newFilesPromise)
+
+                const recipeFilesPromise = filesId.map((fileId) => {
+                    File.createRecipeFiles({
+                        recipe_id: req.body.id,
+                        file_id: fileId.rows[0].id
+                    })
+                })
+                await Promise.all(recipeFilesPromise)
             }
 
+            if(req.body.removed_files){
+                const removedFiles = req.body.removed_files.split(',')
+                const lastIndex = removedFiles.length - 1
+                removedFiles.splice(lastIndex, 1)
+
+                const removedRecipeFiles = removedFiles.map(id => File.delete(id))
+                await Promise.all(removedRecipeFiles)
+            }
+
+            await Recipe.update(req.body)
+
+            return res.redirect(`/admin/recipes/${req.body.id}`)
         }catch(error){
             throw new Error(error)
         }
@@ -133,7 +177,10 @@ module.exports = {
     },
     async delete(req, res){
         try{
-            await Recipe.delete(req.body.id)
+            const { id } = req.body
+
+            await Recipe.delete(id)
+
             return res.redirect("/admin/recipes")
         }catch(error){
             throw new Error(error)

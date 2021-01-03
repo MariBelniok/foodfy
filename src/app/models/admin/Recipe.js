@@ -1,4 +1,5 @@
 const db = require('../../../config/db')
+const fs = require('fs')
 const { date } = require('../../../lib/utils')
 module.exports = {
     all() {
@@ -58,16 +59,14 @@ module.exports = {
             const query = `
                 UPDATE recipes SET
                     chef_id=($1),
-                    image=($2),
-                    title=($3),
-                    ingredients=($4),
-                    prepare=($5),
-                    info=($6)
-                WHERE id=$7
+                    title=($2),
+                    ingredients=($3),
+                    prepare=($4),
+                    info=($5)
+                WHERE id=$6
             `
             const values = [
-                data.chef,
-                data.image,
+                data.chef_id,
                 data.title,
                 data.ingredients,
                 data.prepare,
@@ -79,11 +78,21 @@ module.exports = {
             throw new Error(error)
         }
     },
-    delete(id){
+    async delete(id){
         try{
-            return db.query(`
-                DELETE FROM recipes 
-                WHERE id = $1`, [id])
+            const results = await db.query(`
+                SELECT * FROM files
+                INNER JOIN recipe_files ON (files.id = recipe_files.file_id)
+                WHERE recipe_files.recipe_id = $1`, [id]
+            )
+
+            const removedFiles = results.rows.map(async file => {
+                fs.unlinkSync(file.path)
+
+                await db.query(`DELETE FROM recipe_files WHERE recipe_files.file_id = $1`, [file.file_id])
+                await db.query(`DELETE FROM files WHERE id = $1`, [file.file_id])
+            })
+            return db.query(`DELETE FROM recipes WHERE id = $1`, [id])
         }catch(error){
             throw new Error(error)
         }

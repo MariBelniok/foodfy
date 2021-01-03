@@ -1,4 +1,5 @@
 const db = require('../../../config/db')
+const fs = require("fs")
 const { date } = require('../../../lib/utils')
 
 module.exports = {
@@ -78,15 +79,33 @@ module.exports = {
             throw new Error(error)
         }
     },
-    delete(id){
+    async delete(id){
         try{
-            return db.query(`
-                DELETE 
-                FROM chefs 
-                WHERE id = $1`, [id]
+            const results = await db.query(`
+                SELECT files.* FROM files
+                INNER JOIN chefs ON (files.id = chefs.file_id)
+                WHERE chefs.id = $1`, [id]
             )
+            const removedFiles = results.rows.map(async file => {
+                fs.unlinkSync(file.path)
+
+                await db.query(`DELETE FROM chefs WHERE id = $1`, [id])
+                return db.query(`DELETE FROM files WHERE id = $1`, [file.id])
+            })
         }catch(error){
             throw new Error(error)
         }
+    },
+    file(id){
+        try {
+            return db.query(`
+            SELECT files.* FROM files
+            LEFT JOIN chefs ON (files.id = chefs.file_id)
+            WHERE chefs.id = $1`, [id]
+            )
+        } catch (error) {
+            throw new Error(error)
+        }
+        
     }
 }

@@ -25,13 +25,13 @@
         </div>
 
         <div id="images-preview">
-            {% if files %}
-                {% for image in files %}
-                    <div class="image">
+            {% if item.images %}
+                {% for image in item.images %}
+                    <div class="image" id="{{ image.file_id }}">
                         <img src="{{image.src}}" alt="{{image.name}}">
                         <i 
                             class="material-icons"
-                            onclick="ImagesUpload.removeOldImages(event)"
+                            onclick="ImagesUpload.removeOldPhoto(event)"
                         >
                         close 
                         </i>
@@ -48,9 +48,11 @@
 </div>
 <div class="form-item" id="ingredients">
     <div>Ingredientes</div>
-    <div class="ingredient">
-        <input type="text" name="ingredients[]" value={{item.ingredients}}>
-    </div>
+    {% for ingredient in item.ingredients %}
+        <div class="ingredient">
+            <input type="text" name="ingredients[]" value={{ingredient}}>
+        </div>
+    {% endfor %}
 </div>
 <button 
     type="button" 
@@ -61,9 +63,11 @@ Adicionar novo ingrediente
 </button>
 <div class="form-item" id="prepares">
     <div>Modo de Preparo</div>
-    <div class="prepare">
-        <input type="text" name="prepare[]" value={{item.prepare}}>
-    </div>
+    {% for prepare in item.prepare %}
+        <div class="prepare">
+            <input type="text" name="prepare[]" value={{prepare}}>
+        </div>
+    {% endfor %}
 </div>
 <button 
     type="button" 

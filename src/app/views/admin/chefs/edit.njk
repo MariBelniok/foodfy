@@ -1,5 +1,7 @@
 {% extends "admin/layout.njk" %}
-
+{% block head %}
+<title>Foodfy Admin - Editar Chef</title>
+{% endblock %}
 {% block content %}
 <div class="admin-create-container">
     <form method="POST" action="/admin/chefs?_method=DELETE" id="delete-btn">
@@ -9,12 +11,12 @@
         </div>
     </form>
     <form action="/admin/chefs?_method=PUT" method="POST" enctype="multipart/form-data">
-    <div class="admin-create-head">
-        <h1>Editando chef </h1>
-        <input type="hidden" name="id" value="{{chef.id}}">
-        <button type="submit">Salvar chef</button> 
-    </div>
-    {%include "admin/chefs/fields.njk"%}
+        <div class="admin-create-head">
+            <h1>Editando chef </h1>
+            <input type="hidden" name="id" value="{{chef.id}}">
+            <button type="submit">Salvar chef</button> 
+        </div>
+        {%include "admin/chefs/fields.njk"%}
     </form>
 </div>
 {% include "confirm.njk" %}
