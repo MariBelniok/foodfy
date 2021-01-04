@@ -1,3 +1,4 @@
+// RECIPE CARDS
 const cards = document.querySelectorAll(".card")
 for(let card of cards){
     card.addEventListener("click", () => {
@@ -6,9 +7,9 @@ for(let card of cards){
     })
 }
 
-
-toggleItems = document.querySelectorAll(".toggle-item"),
-buttons = document.querySelectorAll(".toggle-btn"),
+// HIDE AND SHOW RECIPE INFORMATION
+const toggleItems = document.querySelectorAll(".toggle-item")
+const buttons = document.querySelectorAll(".toggle-btn")
 buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
         toggleItems[index].classList.toggle("active")
@@ -20,6 +21,23 @@ buttons.forEach((button, index) => {
     })
 })
 
+//LIGHTING MENU ITEM ON CLICK
+const ActiveMenu = {
+    active() {
+        const menuItems = document.querySelectorAll('.menu-admin a')
+        const currentPage = location.pathname
+
+        for(item of menuItems){
+            if(currentPage.includes(item.getAttribute('href'))){
+                item.classList.add('active-menu')
+            }
+        }
+    }
+}
+ActiveMenu.active() 
+
+
+//ADD A INPUT TO PREPARATION AND INGREDIENTS FORMS
 const AddButton = {
     addIngredient(){
         const ingredients = document.querySelector("#ingredients")
@@ -202,5 +220,38 @@ const ImagesUpload = {
             }
         }
         photoDiv.remove()
+    }
+}
+
+//IMAGE ZOOM BOX
+const ImageGallery = {
+    highlight: document.querySelector('.info-content .highlight > img'),
+    previews: document.querySelectorAll('.gallery-preview img'),
+    setImage(e){
+        const { target } = e
+
+        ImageGallery.previews.forEach(preview => preview.classList.remove('active'))
+        target.classList.add("active")
+
+        ImageGallery.highlight.src = target.src
+        Lightbox.image.src = target.src
+    }
+}
+
+const Lightbox = {
+    target: document.querySelector('.lightbox-target'),
+    image: document.querySelector('.lightbox-target img'),
+    closeBtn: document.querySelector('.lightbox-target a.lightbox-close'),
+    open(){
+        Lightbox.target.style.opacity = 1
+        Lightbox.target.style.top = 0
+        Lightbox.target.style.bottom = 0
+        Lightbox.closeBtn.style.top = 0
+    },
+    close(){
+        Lightbox.target.style.opacity = 0
+        Lightbox.target.style.top = "-100%"
+        Lightbox.target.style.bottom = "initial"
+        Lightbox.closeBtn.style.top = "-80px"
     }
 }

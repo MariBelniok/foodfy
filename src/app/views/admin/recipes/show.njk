@@ -10,25 +10,50 @@
 </div>   
 <div class="info-recipe" id="{{item.id}}">
     <div class="info-content">
-        <img src="{{ images[0].src }}" alt="Receita {{ item.title }}">
+        <div class="highlight">
+            <img src="{{ images[0].src }}" alt="Imagem da receita {{ item.title }}" onclick="Lightbox.open()">
+        </div>
+        <div class="lightbox-target">
+            <img src="{{images[0].src}}" alt="{{images[0].name}}" >
+            <a 
+                href="#" 
+                class="lightbox-close"
+                onclick="Lightbox.close()"
+            >
+                <i class="material-icons">close</i>
+            </a>
+        </div>
+        <div class="gallery-preview">
+            {% for image in images %}
+                <img 
+                    src="{{ image.src }}" 
+                    alt="Imagem da receita {{ image.name }}"
+                    {% if loop.index0 == 0 %}
+                        class="active"
+                    {% endif %}
+                    onclick="ImageGallery.setImage(event)"
+                >
+            {% endfor %}
+        </div>
         <h2>{{ item.title }}</h2>
         <p>{{ item.chef_name }}</p>
     </div>
+
     <div class="info-prepare">
-    <h3>Ingredientes</h3>
-        <ul class="toggle-item active">
-            {% for ingredient in item.ingredients%}
-            <li>{{ ingredient }}</li>
-            {% endfor %}
-        </ul>
-    <h3>Modo de Preparo</h3>
-        <ul class="toggle-item active">
-            {% for prepare in item.prepare %}
-            <li>{{ prepare }}</li>
-            {% endfor %}
-        </ul>
-    <h3>Informações Adicionais</h3>
-    <p class="toggle-item active">{{ item.info }}</p>
+        <h3>Ingredientes</h3>
+            <ul class="toggle-item active">
+                {% for ingredient in item.ingredients%}
+                    <li>- {{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        <h3>Modo de Preparo</h3>
+            <ul class="toggle-item active">
+                {% for prepare in item.prepare %}
+                    <li>- {{ prepare }}</li>
+                {% endfor %}
+            </ul>
+        <h3>Informações Adicionais</h3>
+        <p class="toggle-item active">{{ item.info }}</p>
     </div>
 
 </div>

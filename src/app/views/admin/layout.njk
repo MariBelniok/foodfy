@@ -11,9 +11,9 @@
 </head>
 <body>
     <header class="menu-admin">
-        <a href="/admin/chefs/create"><img src="/assets/logo2.png" alt=""></a>
-        <a href="/admin/recipes">Receitas</a>
-        <a href="/admin/chefs">Chefs</a>
+        <a href="/" ><img src="/assets/logo2.png" alt=""></a>
+        <a href="/admin/recipes" onclick="ActiveMenu.active()">Receitas</a>
+        <a href="/admin/chefs" onclick="ActiveMenu.active()">Chefs</a>
     </header>
     {% block content %}
     {% endblock %}
