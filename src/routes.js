@@ -14,7 +14,7 @@ routes.get('/recipes', user.recipes)
 routes.get('/chefs', user.chefs)
 routes.get('/search', user.search)
 routes.get('/chefs/:id', user.showChef)
-routes.get('/info/:id', user.info)
+routes.get('/info/:id', user.showRecipes)
 
 
 routes.get('/admin/recipes', recipes.index)

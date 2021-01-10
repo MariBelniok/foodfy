@@ -12,9 +12,14 @@
         <div class="card" id="{{item.id}}">
             <img src="{{ item.image }}" alt="Receita {{ item.title }}">
             <h3>{{ item.title }}</h3>
-            <p>{{ item.chefs_name }}</p>
+            <p>{{ item.chef_name }}</p>
         </div>
         {% endfor %}
+    </div>
+    <div class="pagination" 
+        data-page={{pagination.page}} 
+        data-total={{pagination.total}} 
+        data-filter={{filter}}>
     </div>
 </section>
 </div>

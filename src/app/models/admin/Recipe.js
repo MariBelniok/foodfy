@@ -1,6 +1,5 @@
 const db = require('../../../config/db')
 const fs = require('fs')
-const { date } = require('../../../lib/utils')
 module.exports = {
     all() {
         try{
@@ -24,9 +23,8 @@ module.exports = {
                 title,
                 ingredients,
                 prepare,
-                info,
-                created_at
-                )VALUES($1, $2, $3, $4, $5, $6)
+                info
+                )VALUES($1, $2, $3, $4, $5)
                 RETURNING id
             `
             const values = [
@@ -35,7 +33,6 @@ module.exports = {
                 data.ingredients,
                 data.prepare,
                 data.info,
-                date(Date.now()).iso
             ]
             return db.query(query, values)
         }catch(error){
@@ -49,7 +46,8 @@ module.exports = {
                 SELECT recipes.*, chefs.name AS chef_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                WHERE recipes.id = $1`, [id])
+                WHERE recipes.id = $1
+                `, [id])
         }catch(error){
             throw new Error(error)
         }
@@ -129,8 +127,9 @@ module.exports = {
                   ) AS total`;
       
               endQuery = `
-                      ${filterQuery}
-                      ${endQuery}
+                    ${filterQuery}
+                    ORDER BY recipes.updated_at DESC
+                    LIMIT ${limit} OFFSET ${offset}
                   `;
             }
       

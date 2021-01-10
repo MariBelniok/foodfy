@@ -1,5 +1,5 @@
 // RECIPE CARDS
-const cards = document.querySelectorAll(".card")
+const cards = document.querySelectorAll(".cards .card")
 for(let card of cards){
     card.addEventListener("click", () => {
         const cardId = card.getAttribute("id")

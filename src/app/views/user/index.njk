@@ -3,23 +3,27 @@
 {% block content %}
 <div class="banner">
     <div class="banner-content">
-    <h1>As melhores receitas</h1>
-    <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
+        <h1>As melhores receitas</h1>
+        <p>Aprenda a construir os melhores pratos com receitas criadas por profissionais do mundo inteiro.</p>
     </div>
     <img src="assets/banner.png" alt="">
-</div>
 </div>
 
 <div class="middle-container">
     <h2>Mais acessadas</h2>
     <div class="cards">
         {%for item in items %}
-        <div class="card" id="{{item.id}}">
+        <div class="card" id="{{ item.id }}">
             <img src="{{ item.image }}" alt="Receita {{ item.title }}">
             <h3>{{ item.title }}</h3>
-            <p>{{ item.chefs_name }}</p>
+            <p>{{ item.chef_name }}</p>
         </div>
         {% endfor %}
+    </div>
+    <div class="pagination" 
+        data-page={{pagination.page}} 
+        data-total={{pagination.total}} 
+        data-filter={{filter}}>
     </div>
 </div>
 </div>

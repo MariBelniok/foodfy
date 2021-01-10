@@ -55,7 +55,8 @@ module.exports = {
                 SELECT recipes.*, chefs.name AS chefs_name
                 FROM recipes
                 LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-                WHERE chef_id = $1`, [id]
+                WHERE chef_id = $1
+                ORDER BY recipes.created_at DESC`, [id]
             )
         }catch(error){
             throw new Error(error)

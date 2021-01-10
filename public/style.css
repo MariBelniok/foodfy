@@ -6,6 +6,11 @@
 body{
     font-family: 'Roboto', sans-serif;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
 }
 a{
     text-decoration: none;
@@ -181,12 +186,10 @@ a:hover{
 
 /* FOOTER */
 .footer-container{
-    display: block;
-    margin-top: 100px;
     background-color: #EEEEEE;
     color: #999999;
     text-align: center;
-    width: 100%;
+    width: 100%
 }
 .footer-container p{
     padding: 20px;
@@ -209,6 +212,7 @@ a:hover{
 .info-content{
     text-align: center;
     margin-bottom: 50px;
+    width: 950px;
 }
 .info-content img{
     width: 100%;
@@ -333,6 +337,7 @@ a:hover{
 /* ADMIN CREATE RECIPES*/
 .admin-create-container{
     position: relative;
+    width: 950px;
 }
 .admin-infos,
 .admin-create-head{
@@ -341,6 +346,7 @@ a:hover{
     flex-flow: wrap;
     align-items: baseline;
     justify-content: space-between;
+    width: 100%;
 }
 .menu .filter button,
 .btn-new,
@@ -369,7 +375,7 @@ a:hover{
 .delete-btn button[type="submit"] {
     background-color:#DC4747;
     position: absolute;
-    right: 20%;
+    right: 17%;
     top: 48px;
 }
 .admin-infos h1,
@@ -514,7 +520,7 @@ a:hover{
     margin-bottom: 150px;
 }
 .chefs-list{
-    width: 800px;
+    width: 950px;
     margin: 50px auto 32%;
 }
 .chefs-list h1{
